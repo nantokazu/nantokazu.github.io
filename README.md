@@ -1,0 +1,2 @@
+# nantokazu-reaction-spammer
+nantokazuのリアクションスパマー
